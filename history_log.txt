@@ -1,9 +1,1 @@
-isra;Ultimate Sort;80
-isra;Countdown;50
-azuz;Countdown;50
-azuz;Ultimate Sort;75
-ahmed;Robot Path;38
-ahmed;Countdown;50
-mohsen;Countdown;50
-isra;Countdown;50
-lulu;Ultimate Sort;75
+
