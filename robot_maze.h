@@ -1,5 +1,5 @@
 /*
-    ROBOTMAZE.c
+    robot_maze.h
     Task 3: Robot Path (Course de Robots)
     Objective: Navigate a grid to find the exit using N/S/E/O commands.
 */

@@ -1,155 +1,90 @@
-Arena de Défis Algorithmiques
+# Arena de Défis
 
-Plateforme C Interactive de Competitive Programming
+**Arena de Défis** is an interactive terminal program written in C for practicing algorithmic problem solving. Players sign in with a username, choose from four small challenges, earn points, and view their personal history or the global leaderboard.
 
-Arena de Défis est une application entièrement développée en langage C, proposant plusieurs mini-jeux algorithmiques pour entraîner les étudiants à la résolution de problèmes, à l’optimisation et à la pensée computationnelle.
-Le système inclut un tableau de bord animé, des défis progressifs, un historique, un classement global et un système de scoring.
+The interface uses ANSI colors and terminal control sequences. It is intended to run in a Unix-like terminal.
 
+## Screenshots
 
-le Projet est réalisé à l’École Nationale des Sciences de l’Informatique (ENSI) par les élèves :
-Askri Isra
-Elaa Ben Aoun
-Riahi Dalia
+### Sign-in
 
+![Arena sign-in screen](assets/login-screen.png)
 
-📌 Fonctionnalités Principales
-🔹 1. Défi : Countdown (Le Compte est Bon)
+### Main menu
 
-Implémenté dans countdown.c
+![Arena dashboard with challenge menu](assets/dashboard.png)
 
-Génération aléatoire de 6 nombres
+### Countdown challenge
 
-Création d'un objectif solvable via un moteur d’opérations internes
+![Countdown arithmetic challenge](assets/countdown-challenge.png)
 
-Résolution étape par étape avec opérations : + - * /
+### Dashboard after earning points
 
-Système de réinitialisation (Reset)
+![Dashboard showing a player's score and rank](assets/scored-dashboard.png)
 
-Ajout automatique de 50 points en cas de réussite
+## Challenges and features
 
-🔹 2. Défi : Mastermind Algorithmique
+- **Countdown:** Combine a pool of numbers with arithmetic operations to reach a generated target. The game supports resetting a round and exiting back to the menu.
+- **Mastermind:** Guess a generated four-digit code. Feedback indicates how many digits are correct and in the right or wrong positions.
+- **Robot Path:** Navigate a grid maze using directional commands and try to reach the exit.
+- **Ultimate Sort:** Sort a generated array under the challenge's swap constraints.
+- **Score and history:** Points are persisted between runs. The application can display a leaderboard and the signed-in player's mission history.
+- **Player ranks:** The dashboard labels scores up to 50 as Newbie, 51–100 as Intermediate, and above 100 as Expert.
 
-Implémenté dans tache2proj.c
+Points are awarded by each challenge when its completion condition is met. The exact reward can vary by challenge.
 
-Une séquence secrète est générée
+## Requirements
 
-Le joueur propose une combinaison
+- GCC or another C compiler with GNU/POSIX-compatible support
+- A Unix-like operating system and terminal
+- `make` is optional; the project can be compiled directly with GCC
 
-Le système répond :
+## Build and run
 
-✔️ bons chiffres bien placés
+From the repository root, compile the program:
 
-❌ bons chiffres mais mal placés
+```sh
+gcc -std=c11 -Wall -Wextra -o arena main.c
+```
 
-Score attribué selon performance
+Run it with:
 
-🔹 3. Défi : Robot Maze
-
-Implémenté dans ROBOTMAZE.c
-
-Exploration d’un labyrinthe sous forme de grille
-
-Algorithme de recherche du chemin le plus court
-
-Visualisation du parcours
-
-Attribution de points selon le temps/chemin trouvé
-
-🔹 4. Défi : Tri Ultime (Ultimate Sort)
-
-Implémenté dans TRIULTIMATE.c
-
-Défis de tri avec contraintes
-
-Comptage des opérations effectuées
-
-Score selon efficacité de l’algorithme
-
-🔹 5. Système de Score, Historique & Classement
-
-Implémenté dans leaderboard.c
-
-Fichier utilisé : history_log.txt
-
-Sauvegarde automatique :
-
-nom du joueur
-
-mission réalisée
-
-points gagnés
-
-Classement global trié décroissant
-
-Journal personnel du joueur
-
-🔹 6. Interface Utilisateur Interactive
-
-Implémenté dans interface.c
-
-Menu coloré en ASCII Art
-
-Authentification du joueur
-
-Tableau de bord dynamique
-
-Navigation vers les différents défis
-
-Système de rangs :
-
-Newbie (0–50 pts)
-
-Intermédiaire (51–100 pts)
-
-Expert (100+ pts)
-
-🗂️ Structure du Projet
-/Arena-De-Defis
-│── interface.c
-│── countdown.c
-│── tache2proj.c
-│── ROBOTMAZE.c
-│── TRIULTIMATE.c
-│── leaderboard.c
-│── history_log.txt       (généré automatiquement)
-│── README.md
-
-
-🛠️ Compilation & Exécution
-✔️ Compilation (simple)
-gcc interface.c -o arena
-
-
-⚠️ Assurez-vous que tous les fichiers .c sont dans le même dossier,
-car interface.c les inclut directement via :
-
-#include "countdown.c"
-#include "tache2proj.c"
-#include "leaderboard.c"
-#include "ROBOTMAZE.c"
-#include "TRIULTIMATE.c"
-
-▶️ Lancer le programme
+```sh
 ./arena
+```
 
-📊 Système de Points
-Défi	Points typiques
-Countdown	+50 pts
-Mastermind	variable
-Robot Maze	+50 pts
-Ultimate Sort	+20 pts
-Bonus / variantes	selon mission
+Enter a username when prompted, then choose a challenge or view the leaderboard and personal history from the main menu. Select `0` to exit.
 
-Un historique complet est conservé dans history_log.txt.
+## Project layout
 
-🧪 Exemple de Session
+```text
+.
+├── main.c                 # Login, dashboard, menu, and program entry point
+├── countdown.h            # Countdown arithmetic challenge
+├── mastermind.h           # Mastermind code-breaking challenge
+├── robot_maze.h            # Robot maze challenge
+├── ultimate_sort.h         # Constrained sorting challenge
+├── leaderboard.h           # Score persistence, leaderboard, and history
+├── assets/                 # README screenshots
+└── history_log.txt         # Created/updated as points are earned
+```
 
-L'utilisateur entre son nom
+Challenge implementations currently live in headers and are included by `main.c`; compile `main.c` as the single translation unit shown above. The headers contain function definitions and are not intended to be compiled separately.
 
-Accède au menu coloré
+## Score storage
 
-Lance un défi
+When a player earns points, the program appends a semicolon-separated record to `history_log.txt` in the current working directory:
 
-Gagne un score → automatiquement enregistré
+```text
+username;challenge;points
+```
 
-Le classement global se met à jour
+The same file supplies the total score, leaderboard, and personal history. Keep it in place to retain scores between sessions. The file is generated when the first score is recorded.
+
+## Authors
+
+Created at the École Nationale des Sciences de l’Informatique (ENSI) by:
+
+- Askri Isra
+- Elaa Ben Aoun
+- Riahi Dalia

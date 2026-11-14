@@ -1,5 +1,5 @@
 /*
-    TRIULTIMATE.c
+    ultimate_sort.h
     Task 4: Tri Ultime (Ultimate Sort)
     Objective: Sort the array by swapping elements manually.
     Constraints: Limited number of swaps allowed.
@@ -52,7 +52,7 @@ void print_sort_interface(int arr[], int n) {
     printf("\n\n");
 }
 
-// Main Game Function called by interface.c
+// Main game function called by main.c
 void play_sorting_game(char* username, int* global_score) {
     int arr[ARRAY_SIZE];
     int moves = 0;

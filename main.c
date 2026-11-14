@@ -6,10 +6,10 @@
 
 // MAKE SURE THESE FILENAMES MATCH YOUR ACTUAL FILES
 #include "countdown.h" 
-#include "tache2proj.h"
+#include "mastermind.h"
 #include "leaderboard.h"
-#include "ROBOTMAZE.h"
-#include "TRIULTIMATE.h"
+#include "robot_maze.h"
+#include "ultimate_sort.h"
 
 
 // --- COLORS ---
@@ -199,11 +199,10 @@ int main() {
             }
         }
         
-        // In interface.c
 if (choice == 3) {
     printf("\nLaunching Robot...\n");
     int old_score = score;
-    play_robot_maze(USERNAME, &score); // Call the function from ROBOTMAZE.c
+    play_robot_maze(USERNAME, &score);
     
     int gained = score - old_score;
     if (gained > 0) {
